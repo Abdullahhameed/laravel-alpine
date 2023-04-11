@@ -9,7 +9,8 @@
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-        <script src="https://cdn.tailwindcss.com"></script>
+        {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
         @vite('resources/js/app.js')
 
@@ -25,6 +26,7 @@
         </style> --}}
     </head>
     <body class="antialiased">
+        <h3 class="text-2xl text-center font-bold text-orange-900 mt-3">X-Data</h3>
         <div x-data="{ name: 'Abdullah Hameed' }">
             <div class="bg-green-400 m-4 p-4 rounded">
                 <span x-text="name"></span>
@@ -34,6 +36,34 @@
                 <span x-text="message"></span> <br />
                 <span x-text="name"></span>
             </div>
+        </div>
+        <h3 class="text-2xl text-center font-bold text-orange-900 mt-3">X-Bind</h3>
+        <p class="p-4">X-Bind is a directive that allows you to dynamically bind an HTML element's attributes to JavaScript expressions or values</p>
+
+        <div class="p-4 flex justify-start" x-data="{ 
+            selectedImageUrl: 'https://images.unsplash.com/photo-1617854818583-09e7f077a156?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80', 
+            show : true,
+            inputValue : 'Hello'
+        }">
+            <img class="h-75 w-2/6 pr-4" :class="{ 'hidden' : !show }" :src="selectedImageUrl" />
+            <input class="w-full form-control h-10 mt-8 border border-danger" type="text" :value="inputValue" :style="{ color: 'red' }" />
+        </div>
+
+        <h3 class="text-2xl text-center font-bold text-orange-900 mt-3">X-Model</h3>
+        <p class="p-4">X-Model is a directive that allows you to create two-way data bindings between form inputs and your application's data.</p>
+
+        <div class="p-4" x-data="{ message: 'Hello World' }">
+            <input type="text" x-model="message" >
+            <p x-text="message" class="mt-2 p-2 bg-slate-200"></p>
+        </div>
+        <div class="max-w-md mx-auto space-y-2" x-data="{ myColor: 'gray' }">
+            <div class="w-24 h-24 rounded" :class="'bg-' +myColor+ '-500'"></div>
+            <select x-model="myColor">
+                <option value="gray">Gray</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+            </select>
         </div>
     </body>
 </html>
